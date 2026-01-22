@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CRUD.Models.Product>
+
+<h2>Products</h2>
+
+<button class="btn btn-primary mb-2" onclick="openCreate()">Add Product</button>
+
+<div id="formArea"></div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="productTable">
+        @foreach (var item in Model)
+        {
+            <tr id="row_@item.ProductId">
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                <td>@item.Quantity</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" onclick="edit(@item.ProductId)">Edit</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteProduct(@item.ProductId)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        function openCreate() {
+            $.get('/Product/Create', function (html) {
+                $('#formArea').html(html);
+            });
+        }
+
+        function edit(id) {
+            $.get('/Product/Edit/' + id, function (html) {
+                $('#formArea').html(html);
+            });
+        }
+
+        function deleteProduct(id) {
+            if (!confirm('Are you sure?')) return;
+
+            $.post('/Product/DeleteAjax', { id: id }, function () {
+                $('#row_' + id).remove();
+            });
+        }
+    </script>
+}
