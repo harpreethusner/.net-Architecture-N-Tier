@@ -9,6 +9,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<DapperContext>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService,ProductService>();
+builder.Services.AddTransient<IEmailService, EmailService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 
 var app = builder.Build();
