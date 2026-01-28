@@ -7,6 +7,7 @@ namespace CRUD_N_Tier.Controllers
    //   Product controller
     public class ProductController : Controller
     {
+        //  use product services
         private readonly IProductService _service;
 
         public ProductController(IProductService service)
