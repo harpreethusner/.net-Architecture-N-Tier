@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CRUD_N_Tier.Controllers
 {
+   //   Product controller
     public class ProductController : Controller
     {
         private readonly IProductService _service;
